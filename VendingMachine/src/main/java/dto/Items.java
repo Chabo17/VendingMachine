@@ -32,14 +32,12 @@ public class Items {
         return count;
     }
     
-<<<<<<< HEAD
+
     public void setCount(){
         this.count--;
     }
-=======
+
     public void decreaseCount(){
         count--;
     }
-    
->>>>>>> 3d879e57898d90bb6d101cf3da3a6ba35d31870a
 }

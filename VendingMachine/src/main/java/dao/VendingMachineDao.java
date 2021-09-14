@@ -17,11 +17,11 @@ public interface VendingMachineDao {
     
      List<Items> inventory = new ArrayList<>();
      
-     public void buyItem();
+     public void buyItem(int indexOfItem);
      
-     public void checkCost();
+     public double checkCost(int indexOfItem);
      
-     public void checkQuantity();
+     public int checkQuantity(int indexOfItem);
      
     public void returnChange();
     

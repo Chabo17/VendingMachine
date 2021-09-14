@@ -9,6 +9,12 @@ package dao;
  *
  * @author chadb
  */
-public class VendingMachineDaoException {
+public class VendingMachineDaoException extends Exception{
+    public VendingMachineDaoException(String message) {
+        super(message);
+    }
     
+    public VendingMachineDaoException(String message, Throwable cause) {
+        super(message, cause);
+    }
 }
