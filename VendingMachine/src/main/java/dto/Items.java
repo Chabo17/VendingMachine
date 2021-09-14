@@ -27,4 +27,8 @@ public class Items {
         return price;
     }
     
+    public int getCount(){
+        return count;
+    }
+    
 }
