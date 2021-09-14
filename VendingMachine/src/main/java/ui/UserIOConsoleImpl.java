@@ -4,11 +4,6 @@
  * and open the template in the editor.
  */
 package ui;
-
-/**
- *
- * @author chadb
- */
 import java.util.Scanner;
 
 /**
