@@ -5,10 +5,29 @@
  */
 package dao;
 
+import dto.Items;
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author chadb
  */
-public class VendingMachineDao {
+public interface VendingMachineDao {
     
+     List<Items> inventory = new ArrayList<>();
+     
+     public void buyItem();
+     
+     public void checkCost();
+     
+     public void checkQuantity();
+     
+    public void returnChange();
+    
+    public List<Items> getAllItems();
+    
+    public void cancelOrder(); 
+ 
+       
 }
