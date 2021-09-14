@@ -31,4 +31,8 @@ public class Items {
         return count;
     }
     
+    public void decreaseCount(){
+        count--;
+    }
+    
 }
