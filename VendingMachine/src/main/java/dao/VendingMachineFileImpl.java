@@ -168,6 +168,7 @@ public class VendingMachineFileImpl implements VendingMachineDao{
     
     private void readLibrary() throws VendingMachineDaoException{
         Scanner sc;
+        List<Items> temp = new ArrayList<>();
         String itemAsText; 
         Items itemFromText; 
         
@@ -182,9 +183,9 @@ public class VendingMachineFileImpl implements VendingMachineDao{
         {
             itemAsText = sc.nextLine();
             itemFromText =  unMarshallItem(itemAsText);
-            inventory.add(itemFromText);
+            temp.add(itemFromText);
         }
-        
+        inventory =temp ;
         sc.close();
     }
     

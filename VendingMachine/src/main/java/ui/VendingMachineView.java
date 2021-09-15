@@ -37,7 +37,7 @@ public class VendingMachineView {
     public void getAllItems(List<Items> Inv){
         io.print("=== Invitory ===");
         for (int i =0; i< Inv.size();i++){
-            io.print(i + ": " + Inv.get(i).getName() + " -> $"  + Inv.get(i).getPrice());
+            io.print(i + ": " + Inv.get(i).getName() + " -> $"  + Inv.get(i).getPrice() + " -> "  + Inv.get(i).getCount() );
       }
       io.readString("Please hit enter to continue.");
     }

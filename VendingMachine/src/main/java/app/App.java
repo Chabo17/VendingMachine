@@ -7,6 +7,7 @@ package app;
 
 import controller.Controller;
 import dao.VendingMachineDao;
+import dao.VendingMachineDaoException;
 import dao.VendingMachineFileImpl;
 import ui.UserIO;
 import ui.UserIOConsoleImpl;
@@ -19,7 +20,7 @@ import ui.VendingMachineView;
 public class App {
 
    
-    public static void main(String args[]){
+    public static void main(String args[]) throws VendingMachineDaoException{
         UserIO myIO = new UserIOConsoleImpl();
         VendingMachineDao myDao = new VendingMachineFileImpl();
         VendingMachineView myView = new VendingMachineView(myIO);

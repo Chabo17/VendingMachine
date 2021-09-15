@@ -5,10 +5,28 @@
  */
 package serviceLayer;
 
+import dto.Items;
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author Brian
  */
 public interface ServiceLayer {
+        List<Items> inventory = new ArrayList<>();
+     
+    public void buyItem(int indexOfItem);
+     
+    public double checkCost(int indexOfItem);
+     
+    public int checkQuantity(int indexOfItem);
+     
+    public int[] returnChange();
     
+    public List<Items> getAllItems();
+    
+    public void cancelOrder(); 
+
+    public void setPersonBalance(double insertCoins);
 }
