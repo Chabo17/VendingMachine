@@ -10,5 +10,6 @@ package dao;
  * @author Brian
  */
 public interface Audit {
-    
+    public void writeAuditEntry(String entry) 
+            throws VendingMachineDaoException;
 }

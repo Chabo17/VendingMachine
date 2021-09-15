@@ -49,3 +49,4 @@ public class VendingMachineView {
     public int checkQuanity(){
         return io.readInt("Please enter the ID number of the requested item");
     } 
+}
