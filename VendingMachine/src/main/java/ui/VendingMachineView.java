@@ -55,10 +55,14 @@ public class VendingMachineView {
         return io.readDouble("Please enter money ");
     }
 
-    public double returnChange() {
-    	return io.readInt("Here is your change");
-    	
-    }
+//    public void returnChange(int[] changeArray) {
+//    	io.print("Here is your change");
+//        io.print("Dollars" + changeArray[0]);
+//        io.print("Quarters" + changeArray[1]);
+//        io.print("Dimes" + changeArray[2]);
+//        io.print("Nickels" + changeArray[3]);
+//    	
+//    }
     
     public String cancelOrder() {
     	return io.readString("Leaving the vending machine");
@@ -68,4 +72,13 @@ public class VendingMachineView {
     	return io.readInt("Check cost of product");
     	
     }
+
+    public void returnChange(int[] returnChange) {
+    	io.print("Here is your change");
+        io.print("Dollars" + returnChange[0]);
+        io.print("Quarters" + returnChange[1]);
+        io.print("Dimes" + returnChange[2]);
+        io.print("Nickels" + returnChange[3]);
+    }
+
 }

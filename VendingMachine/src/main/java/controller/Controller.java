@@ -37,7 +37,7 @@ public class Controller {
                     insertMoney();
                     break;
                 case 4:
-
+                    exitVendingMachine();
                     running = false;
                     break;
             }
@@ -55,5 +55,9 @@ public class Controller {
     
     public void buyItem(){
         dao.buyItem(view.buyItem());
+    }
+    
+    public void exitVendingMachine(){
+        view.returnChange(dao.returnChange());
     }
 }

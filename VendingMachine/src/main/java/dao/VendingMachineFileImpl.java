@@ -25,17 +25,19 @@ import java.util.logging.Logger;
  */
 public class VendingMachineFileImpl implements VendingMachineDao{
     
-    private final String INVENTORY = "INVENTORY.txt";
+    private final String INVENTORY_FILE = "INVENTORY.txt";
     public static final String DELIMITER = "::";
     
     List<Items> inventory = new ArrayList<>();
      double personBalance;
 
-    public VendingMachineFileImpl() {
+    public VendingMachineFileImpl() throws VendingMachineDaoException {
+        readLibrary();
         this.personBalance = 0;
     }
 
-    public VendingMachineFileImpl(double personBalance) {
+    public VendingMachineFileImpl(double personBalance) throws VendingMachineDaoException {
+        readLibrary();
         this.personBalance = personBalance;
     }
     
@@ -61,19 +63,30 @@ public class VendingMachineFileImpl implements VendingMachineDao{
         desiredItem.decreaseCount();
         personBalance -= (desiredItem.getPrice());
         
+        try {
+            writeLibrary();
+        } catch (VendingMachineDaoException ex) {
+            Logger.getLogger(VendingMachineFileImpl.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(VendingMachineFileImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
     }
 
 
-    
-
     @Override
-    public double checkCost(int indexOfItem) {       
+    public double checkCost(int indexOfItem) {    
         return inventory.get(indexOfItem).getPrice();
     }
 
     @Override
     public int checkQuantity(int indexOfItem) {
+        try {
+            readLibrary();
+        } catch (VendingMachineDaoException ex) {
+            Logger.getLogger(VendingMachineFileImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
         return inventory.get(indexOfItem).getCount();
     }
 
@@ -117,16 +130,23 @@ public class VendingMachineFileImpl implements VendingMachineDao{
         return itemAsText;
     }
     
-    private void writeLibrary() throws VendingMachineDaoException {
+    private void writeLibrary() throws VendingMachineDaoException, FileNotFoundException, IOException {
         PrintWriter out;
 
-        try {
-            out = new PrintWriter(new FileWriter(INVENTORY));
-        } catch (IOException e) {
-            throw new VendingMachineDaoException(
-                    "Could not save Vending Machine Inventory Data.", e);
-        }
+//        try {
+//            out = new PrintWriter(new FileWriter(INVENTORY_FILE));
+//        } catch (IOException e) {
+//            throw new VendingMachineDaoException(
+//                    "Could not save Vending Machine Inventory Data.", e);
+//        
+//        }
+//      
+        out = new PrintWriter(new FileWriter(INVENTORY_FILE));
+        PrintWriter writer = new PrintWriter(INVENTORY_FILE);
+        writer.print("");
+        writer.close();
 
+        
         String ItemAsText;
 
         for (Items currentItem : inventory) {
@@ -152,7 +172,7 @@ public class VendingMachineFileImpl implements VendingMachineDao{
         Items itemFromText; 
         
         try{
-            sc = new Scanner(new BufferedReader(new FileReader(INVENTORY)));
+            sc = new Scanner(new BufferedReader(new FileReader(INVENTORY_FILE)));
         }catch(FileNotFoundException e)
         {
             throw new VendingMachineDaoException("Could not retrieve Vending Machine Inventory Data", e);
@@ -164,6 +184,7 @@ public class VendingMachineFileImpl implements VendingMachineDao{
             itemFromText =  unMarshallItem(itemAsText);
             inventory.add(itemFromText);
         }
+        
         sc.close();
     }
     
