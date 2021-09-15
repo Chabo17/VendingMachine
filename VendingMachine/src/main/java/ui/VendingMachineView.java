@@ -46,11 +46,26 @@ public class VendingMachineView {
         return io.readInt("Please enter the ID number of the requested item");
     }
     
-    public int checkQuanity(){
+    public int checkQuanity() {
         return io.readInt("Please enter the ID number of the requested item");
+
     } 
     
     public double insertCoins(){
         return io.readDouble("Please enter money ");
+    }
+
+    public double returnChange() {
+    	return io.readInt("Here is your change");
+    	
+    }
+    
+    public String cancelOrder() {
+    	return io.readString("Leaving the vending machine");
+    }
+     
+    public double checkCost() {
+    	return io.readInt("Check cost of product");
+    	
     }
 }
