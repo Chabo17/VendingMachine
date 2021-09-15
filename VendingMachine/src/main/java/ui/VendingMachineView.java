@@ -46,15 +46,18 @@ public class VendingMachineView {
         return io.readInt("Please enter the ID number of the requested item");
     }
     
-    public int checkQuanity(){
+    public int checkQuanity() {
         return io.readInt("Please enter the ID number of the requested item");
-<<<<<<< HEAD
-   
+}
+    public double returnCahnge() {
+    	return
+    }
+    
+    public void cancelOrder() {
+    	
+    }
+     
+    public double checkCost() {
     	
     }
 }
-
-=======
-    } 
-}
->>>>>>> 86386a3b645091442a457ecb936e8a0a267716c1
