@@ -16,6 +16,8 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -26,25 +28,43 @@ public class VendingMachineFileImpl implements VendingMachineDao{
     private final String INVENTORY = "INVENTORY.txt";
     public static final String DELIMITER = "::";
     
-     List<Items> inventory = new ArrayList<>();
+    List<Items> inventory = new ArrayList<>();
      double personBalance;
 
-    @Override
-    //Edge cases        
-        //throw exception if insufficient balance (inventory[i].getPrice()>personBalance)
-        //throw exception if quantity == 0
-    public void buyItem(int indexOfItem) {
-        //loadnventory();
-        Items desiredItem = inventory.get(indexOfItem);
-        desiredItem.decreaseCount();
-        //personBalance -= desiredItem.getPrice();
-        personBalance -= (desiredItem.getPrice());
-        //  
+    public VendingMachineFileImpl() {
+        this.personBalance = 0;
+    }
 
-
-//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public VendingMachineFileImpl(double personBalance) {
+        this.personBalance = personBalance;
     }
     
+
+    private double getPersonBalance() {
+        return personBalance;
+    }
+
+    public void setPersonBalance(double personBalance) {
+        this.personBalance = personBalance;
+    }
+
+    
+    
+    @Override
+    public void buyItem(int indexOfItem) {
+        try {
+            readLibrary();
+        } catch (VendingMachineDaoException ex) {
+            Logger.getLogger(VendingMachineFileImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        Items desiredItem = inventory.get(indexOfItem);
+        desiredItem.decreaseCount();
+        personBalance -= (desiredItem.getPrice());
+        
+
+    }
+
+
     
 
     @Override

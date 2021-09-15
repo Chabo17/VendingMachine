@@ -52,6 +52,17 @@ public class UserIOConsoleImpl implements UserIO {
         System.out.println(msgPrompt);
         return console.nextLine();
     }
+    
+    @Override
+    public double readDouble(String msgPrompt) {
+        while (true) {
+            try {
+                return Double.parseDouble(this.readString(msgPrompt));
+            } catch (NumberFormatException e) {
+                this.print("Input error. Please try again.");
+            }
+        }
+    }
 
 
 }

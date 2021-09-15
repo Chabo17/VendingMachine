@@ -17,6 +17,9 @@ public interface UserIO {
     
     int readInt(String prompt);
     
+    double readDouble(String prompt);
+
+    
     String readString(String prompt);
     
 }
