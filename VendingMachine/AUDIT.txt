@@ -1,3 +1,5 @@
 2021-09-15T15:18:13.102587300 : Chips was purchased, remaining balance : 8.75 
 2021-09-15T15:20:18.617662300 : Chips was purchased, remaining balance : 8.75
 2021-09-15T15:57:13.673662200 : Candy Bar was purchased, remaining balance : 1
+2021-09-15T16:11:53.213072300 : POP was purchased, remaining balance : 2
+2021-09-15T16:12:18.773170300 : POP was purchased, remaining balance : 1

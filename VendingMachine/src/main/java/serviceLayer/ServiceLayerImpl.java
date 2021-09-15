@@ -50,7 +50,7 @@ public class ServiceLayerImpl implements ServiceLayer {
  
         dao.buyItem(indexOfItem);
         try {
-            audit.writeAuditEntry(getItem(indexOfItem).getName() + " was purchased, remaining balance : " + getItem(indexOfItem).getCount());
+            audit.writeAuditEntry(getItem(indexOfItem).getName() + " was purchased, remaining Quantity : " + getItem(indexOfItem).getCount());
             
             // dao.buyItem(indexOfItem);
         } catch (VendingMachineDaoException ex) {
