@@ -54,8 +54,8 @@ public class VendingMachineView {
     	
     }
     
-    public void cancelOrder() {
-    	System.exit(0);
+    public String cancelOrder() {
+    	return io.readString("Leaving the vending machine");
     }
      
     public double checkCost() {
