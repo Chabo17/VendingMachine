@@ -11,35 +11,39 @@ package ui;
  */
 import dto.Items;
 import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 /**
  *
  * @author chadb
  */
+@Component
 public class VendingMachineView {
     
     private UserIO io;
-    
+    @Autowired
     public VendingMachineView(UserIO io){
         this.io = io;
     }
     
-    public int printOptions(){
+    public int printOptions(double balance){
+        io.print("Current Balance: "+ balance);
         io.print("Main menu");
-        io.print("1. Check Items");
-        io.print("2. Buy Items");
-        io.print("3. Insert Money");
-        io.print("4. Exit");
+        io.print("1. Buy Items");
+        io.print("2. Insert Money");
+        io.print("3. Exit");
         
-        return io.readInt("Please select from the above choices.", 1, 4);
+        return io.readInt("Please select from the above choices.", 1, 3);
     }
     
     public void getAllItems(List<Items> Inv){
-        io.print("=== Invitory ===");
+        io.print("=== Inventory ===");
         for (int i =0; i< Inv.size();i++){
             io.print(i + ": " + Inv.get(i).getName() + " -> $"  + Inv.get(i).getPrice() + " -> "  + Inv.get(i).getCount() );
       }
-      io.readString("Please hit enter to continue.");
+     // io.readString("Please hit enter to continue.");
+     io.print("");
     }
     
     public int buyItem(){
@@ -52,7 +56,7 @@ public class VendingMachineView {
     } 
     
     public double insertCoins(){
-        return io.readDouble("Please enter money ");
+        return io.readDouble("Please enter money ", 0 , 9999999);
     }
 
 //    public void returnChange(int[] changeArray) {
@@ -72,13 +76,16 @@ public class VendingMachineView {
     	return io.readInt("Check cost of product");
     	
     }
-
+    public void buyBanner(String msg)
+    {
+        io.print(msg);
+    }
     public void returnChange(int[] returnChange) {
     	io.print("Here is your change");
-        io.print("Dollars" + returnChange[0]);
-        io.print("Quarters" + returnChange[1]);
-        io.print("Dimes" + returnChange[2]);
-        io.print("Nickels" + returnChange[3]);
+        io.print("Dollars " + returnChange[0]);
+        io.print("Quarters " + returnChange[1]);
+        io.print("Dimes " + returnChange[2]);
+        io.print("Nickels " + returnChange[3]);
     }
 
 }

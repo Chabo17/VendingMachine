@@ -16,7 +16,7 @@ import java.util.List;
 public interface ServiceLayer {
         List<Items> inventory = new ArrayList<>();
      
-    public void buyItem(int indexOfItem);
+    public int buyItem(int indexOfItem) throws VendingMachinePurchaseValidationException, VendingMachineInventoryValidationException;
      
     public double checkCost(int indexOfItem);
      
@@ -29,4 +29,5 @@ public interface ServiceLayer {
     public void cancelOrder(); 
 
     public void setPersonBalance(double insertCoins);
+    public double getPersonBalance();
 }

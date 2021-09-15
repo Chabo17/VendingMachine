@@ -12,25 +12,28 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 /**
  *
  * @author chadb
  */
+@Component
 public class VendingMachineFileImpl implements VendingMachineDao{
     
     private final String INVENTORY_FILE = "INVENTORY.txt";
     public static final String DELIMITER = "::";
     
     List<Items> inventory = new ArrayList<>();
-     double personBalance;
-
+ 
+    double personBalance;
+    @Autowired
     public VendingMachineFileImpl() throws VendingMachineDaoException {
         readLibrary();
         this.personBalance = 0;
@@ -42,12 +45,12 @@ public class VendingMachineFileImpl implements VendingMachineDao{
     }
     
 
-    private double getPersonBalance() {
+    public double getPersonBalance() {
         return personBalance;
     }
 
     public void setPersonBalance(double personBalance) {
-        this.personBalance = personBalance;
+        this.personBalance += personBalance;
     }
 
     

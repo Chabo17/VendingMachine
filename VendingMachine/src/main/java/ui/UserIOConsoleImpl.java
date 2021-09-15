@@ -5,11 +5,13 @@
  */
 package ui;
 import java.util.Scanner;
+import org.springframework.stereotype.Component;
 
 /**
  *
  * @author chadb
  */
+@Component 
 public class UserIOConsoleImpl implements UserIO {
      final private Scanner console = new Scanner(System.in);
      
@@ -62,6 +64,16 @@ public class UserIOConsoleImpl implements UserIO {
                 this.print("Input error. Please try again.");
             }
         }
+    }
+
+    @Override
+    public double readDouble(String prompt, int min, int max) {
+        double result;
+        do {
+            result = readDouble(prompt);
+        } while (result < min || result > max);
+
+        return result;
     }
 
 

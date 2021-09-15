@@ -9,6 +9,11 @@ import controller.Controller;
 import dao.VendingMachineDao;
 import dao.VendingMachineDaoException;
 import dao.VendingMachineFileImpl;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+import serviceLayer.VendingMachineInventoryValidationException;
+import serviceLayer.VendingMachinePurchaseValidationException;
 import ui.UserIO;
 import ui.UserIOConsoleImpl;
 import ui.VendingMachineView;
@@ -20,12 +25,18 @@ import ui.VendingMachineView;
 public class App {
 
    
-    public static void main(String args[]) throws VendingMachineDaoException{
-        UserIO myIO = new UserIOConsoleImpl();
-        VendingMachineDao myDao = new VendingMachineFileImpl();
-        VendingMachineView myView = new VendingMachineView(myIO);
-        Controller myController = new Controller(myView,myDao);
-        myController.run();
+    public static void main(String args[]) throws VendingMachineDaoException, VendingMachinePurchaseValidationException, VendingMachineInventoryValidationException{
+        ApplicationContext ctx = 
+           new ClassPathXmlApplicationContext("applicationContext.xml");
+        Controller controller = 
+           ctx.getBean("controller", Controller.class);
+        controller.run();
+//       AnnotationConfigApplicationContext appContext = new AnnotationConfigApplicationContext();
+//        appContext.scan("app.App");
+//        appContext.refresh();
+//
+//        Controller controller = appContext.getBean("controller", Controller.class);
+//        controller.run();
     }
     
 }

@@ -30,6 +30,8 @@ public interface VendingMachineDao {
     public void cancelOrder(); 
 
     public void setPersonBalance(double insertCoins);
+
+    public double getPersonBalance();
      
        
 }

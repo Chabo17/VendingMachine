@@ -6,37 +6,44 @@
 package controller;
 
 import dao.VendingMachineDao;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import serviceLayer.ServiceLayer;
+import serviceLayer.VendingMachineInventoryValidationException;
+import serviceLayer.VendingMachinePurchaseValidationException;
 import ui.VendingMachineView;
 
 /**
  *
  * @author chadb
  */
+@Component
 public class Controller {
     
     private VendingMachineView view;
-    private VendingMachineDao dao;
-    public Controller(VendingMachineView view, VendingMachineDao dao){
+    //private VendingMachineDao dao;
+    private ServiceLayer service;
+    @Autowired
+    public Controller(VendingMachineView view, ServiceLayer service){
         this.view = view;
-        this.dao = dao;
+        this.service = service;
     }
     
-    public void run(){
+    public void run() throws VendingMachinePurchaseValidationException, VendingMachineInventoryValidationException{
 
         boolean running = true;
+        
         while(running){
-            int choice = view.printOptions();
-            switch (choice){
+            getItems();
+            int choice = view.printOptions(service.getPersonBalance());
+            switch (choice){ 
                 case 1:
-                    getItems();
+                    buyItem(view.buyItem());
                     break;
                 case 2:
-                    buyItem();
+                    insertMoney(view.insertCoins());
                     break;
                 case 3:
-                    insertMoney();
-                    break;
-                case 4:
                     exitVendingMachine();
                     running = false;
                     break;
@@ -44,20 +51,34 @@ public class Controller {
         }
     }
     
-   public void insertMoney(){
-       dao.setPersonBalance(view.insertCoins());
+   public void insertMoney(double insertedBalance){
+        service.setPersonBalance(insertedBalance);
+//       dao.setPersonBalance(view.insertCoins());
    }
     
     public void getItems(){
-        view.getAllItems(dao.getAllItems());
+        view.getAllItems(service.getAllItems());
         
     }
     
-    public void buyItem(){
-        dao.buyItem(view.buyItem());
+    public void buyItem(int Index) throws VendingMachinePurchaseValidationException, VendingMachineInventoryValidationException{
+     
+        switch (service.buyItem(Index)){
+            case -1: 
+                view.buyBanner("Not enough Money");
+                break;
+            case 0:
+                view.buyBanner("Not enough Stock");
+                break;
+            default:
+                view.buyBanner("Item Purchased");
+        }
+            
     }
     
     public void exitVendingMachine(){
-        view.returnChange(dao.returnChange());
+        service.returnChange();
+        view.returnChange(service.returnChange());
+        //view.returnChange(dao.returnChange());
     }
 }

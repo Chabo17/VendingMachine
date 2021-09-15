@@ -5,10 +5,13 @@
  */
 package ui;
 
+
+
 /**
  *
  * @author chadb
  */
+
 public interface UserIO {
     
     void print(String msg);
@@ -19,7 +22,8 @@ public interface UserIO {
     
     double readDouble(String prompt);
 
-    
+    double readDouble(String prompt, int min , int max);
+     
     String readString(String prompt);
     
 }
